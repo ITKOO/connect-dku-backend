@@ -1,30 +1,26 @@
 package kr.itkoo.connectdkubackend.model;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
 import kr.itkoo.connectdkubackend.dto.post.PostResponseDTO;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
-@Data
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
-public class Post {
-    @Id
-    @GeneratedValue
-    private Long id;
-
+public class Post extends BaseModel {
     private String title;
 
-    private String name;
+    private String content;
 
     private String imgUrl;
 
+    private boolean isMissionComplete;
+
     public PostResponseDTO toResponse() {
-        return new PostResponseDTO(this.id, this.title, this.name, this.imgUrl);
+        return new PostResponseDTO(this.getId(), this.title, this.content, this.imgUrl, this.isMissionComplete,
+                this.getCreatedAt(), this.getUpdatedAt());
     }
 }
