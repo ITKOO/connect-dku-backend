@@ -1,5 +1,6 @@
 package kr.itkoo.connectdkubackend.controller;
 
+import kr.itkoo.connectdkubackend.dto.user.LoginDTO;
 import kr.itkoo.connectdkubackend.dto.user.UserRequestDTO;
 import kr.itkoo.connectdkubackend.dto.user.UserResponseDTO;
 import kr.itkoo.connectdkubackend.service.UserService;
@@ -19,8 +20,13 @@ public class UserController {
         return ResponseEntity.ok(userService.findById(id));
     }
 
-    @PostMapping()
+    @PostMapping("/signup")
     public ResponseEntity<UserResponseDTO> save(@RequestBody UserRequestDTO dto) {
         return ResponseEntity.ok(userService.save(dto).toResponse());
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<UserResponseDTO> save(@RequestBody LoginDTO dto) {
+        return ResponseEntity.ok(userService.findByPlatformTypeAndPlatformId(dto));
     }
 }
