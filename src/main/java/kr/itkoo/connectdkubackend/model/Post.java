@@ -1,26 +1,44 @@
 package kr.itkoo.connectdkubackend.model;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
+import kr.itkoo.connectdkubackend.config.MissionStatus;
 import kr.itkoo.connectdkubackend.dto.post.PostResponseDTO;
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
-@Getter
-@Setter
+import java.time.LocalDateTime;
+
+@Data
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Post extends BaseModel {
+public class Post {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String title;
 
     private String content;
 
     private String imgUrl;
 
-    private boolean isMissionComplete;
+    private MissionStatus missionStatus;
+
+    @Column(updatable = false)
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
 
     public PostResponseDTO toResponse() {
-        return new PostResponseDTO(this.getId(), this.title, this.content, this.imgUrl, this.isMissionComplete,
+        return new PostResponseDTO(this.getId(), this.title, this.content, this.imgUrl, this.missionStatus,
                 this.getCreatedAt(), this.getUpdatedAt());
     }
 }

@@ -1,5 +1,6 @@
 package kr.itkoo.connectdkubackend.dto.post;
 
+import kr.itkoo.connectdkubackend.config.MissionStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -16,7 +17,7 @@ public class PostResponseDTO {
 
     private String imgUrl;
 
-    private boolean isMissionComplete;
+    private MissionStatus missionStatus;
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
