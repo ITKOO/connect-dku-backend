@@ -1,5 +1,7 @@
 package kr.itkoo.connectdkubackend.dto.user;
 
+import kr.itkoo.connectdkubackend.config.Gender;
+import kr.itkoo.connectdkubackend.config.UserType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,7 +24,9 @@ public class UserResponseDTO {
 
     private String studentId;
 
-    private int gender;
+    private UserType userType;
+
+    private Gender gender;
 
     private int age;
 
